@@ -5,7 +5,7 @@ let size = 16;
 
 buttonEle.addEventListener("click", function () {
   do {
-    size = prompt("Please enter grid size (max 100)");
+    size = prompt("Please enter grid size (max 100):");
   } while (!size || size <= 0 || size > 100);
 
   drawGrid();
@@ -29,6 +29,7 @@ function drawGrid() {
       const gridBox = document.createElement("div");
       gridBox.classList.add("grid-box");
       gridRow.appendChild(gridBox);
+      gridBox.style.opacity = 0;
     }
   }
 
@@ -42,7 +43,14 @@ function drawGrid() {
 
   gridEle.addEventListener("mouseover", function (e) {
     if (e.target.classList.contains("grid-box")) {
-      e.target.style.backgroundColor = generateRandomColor();
+      if (!e.target.style.backgroundColor) {
+        e.target.style.backgroundColor = generateRandomColor();
+      }
+
+      let currentOpacity = parseFloat(e.target.style.opacity);
+      if (currentOpacity < 1) {
+        e.target.style.opacity = currentOpacity + 0.1;
+      }
     }
   });
 }
