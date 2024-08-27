@@ -20,6 +20,7 @@ function generateRandomColor() {
 
 function drawGrid() {
   gridEle.textContent = "";
+
   for (let i = 0; i < size; i++) {
     const gridRow = document.createElement("div");
     gridRow.classList.add("grid-row");
@@ -28,12 +29,6 @@ function drawGrid() {
       const gridBox = document.createElement("div");
       gridBox.classList.add("grid-box");
       gridRow.appendChild(gridBox);
-
-      gridEle.addEventListener("mouseover", function (e) {
-        if (e.target.classList.contains("grid-box")) {
-          e.target.style.backgroundColor = generateRandomColor();
-        }
-      });
     }
   }
 
@@ -43,6 +38,12 @@ function drawGrid() {
 
   gridElements.forEach((ele) => {
     ele.style.height = `${eleSize}px`;
+  });
+
+  gridEle.addEventListener("mouseover", function (e) {
+    if (e.target.classList.contains("grid-box")) {
+      e.target.style.backgroundColor = generateRandomColor();
+    }
   });
 }
 
